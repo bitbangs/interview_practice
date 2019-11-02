@@ -106,7 +106,7 @@ vector<int> MergeSort(vector<int> input) {
 	//odd number of elements? insert last item into proper place in sorted array
 	if (input.size() % 2 > 0) {
 		int leftover = input[input.size() - 1];
-		for (auto ii = input.begin(); ii != input.end(); ++ii) {
+		for (auto ii = output.begin(); ii != output.end(); ++ii) {
 			if (*ii > leftover) {
 				output.insert(ii, leftover);
 			}
