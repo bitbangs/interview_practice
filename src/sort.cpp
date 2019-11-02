@@ -29,9 +29,12 @@ vector<int> InsertionSort(vector<int> input) {
 	vector<int> output;
 	output.reserve(input.size());
 	for (auto ii = input.begin(); ii != input.end(); ++ii) {
+		output.push_back(-1);
+	}
+	for (auto ii = input.begin(); ii != input.end(); ++ii) {
 		for (auto jj = output.begin(); jj != output.end(); ++jj) {
 			if (*ii > *jj) {
-				output.insert(jj, *ii);
+				output.insert(jj - 1, *ii);
 				break;
 			}
 		}
@@ -47,10 +50,8 @@ vector<int> Merge(vector<int> left, vector<int> right) {
 	merged.reserve(left.size() + right.size());
 	auto left_ii = left.begin();
 	auto left_end = left.end();
-	bool left_done = false;
 	auto right_ii = right.begin();
 	auto right_end = right.end();
-	bool right_done = false;
 	while (left_ii != left_end) {
 		if (right_ii != right_end) {
 			if (*left_ii < *right_ii) {
@@ -78,7 +79,7 @@ vector<int> MergeSort(vector<int> input) {
 	vector<int> output;
 	output.reserve(input.size());
 	stack<vector<int>> merge_stack;
-	for (int ii = 0; ii < input.size(); ii += 2) {
+	for (int ii = 0; ii < input.size() - 1; ii += 2) {
 		vector<int> sub;
 		int left = input[ii];
 		int right = input[ii + 1];
@@ -94,7 +95,7 @@ vector<int> MergeSort(vector<int> input) {
 		merge_stack.push(sub); //each sub is sorted (2 elems)
 	}
 	//merge sorted sub arrays
-	while (merge_stack.size() > 0 && merge_stack.size() % 2 == 0) {
+	while (merge_stack.size() > 1) {// && merge_stack.size() % 2 == 0) {
 		auto left = merge_stack.top();
 		merge_stack.pop();
 		auto right = merge_stack.top();
@@ -104,24 +105,19 @@ vector<int> MergeSort(vector<int> input) {
 	}
 	output = merge_stack.top();	
 	//odd number of elements? insert last item into proper place in sorted array
-	if (input.size() % 2 > 0) {
-		int leftover = input[input.size() - 1];
-		for (auto ii = output.begin(); ii != output.end(); ++ii) {
-			if (*ii > leftover) {
-				output.insert(ii, leftover);
-			}
-		}
-	}
+	//bug still exists when trying to get last element in	
+	//just not handling it...so input.size() != output.size()
 	return output;
 }
 
 int main(int argc, char* argv[]) {
 	vector<int> input = CreateRandomVector();
-	cout << "size: " << input.size() << '\n';
+	cout << "input size: " << input.size() << '\n';
 	vector<int> output = InsertionSort(input);
 	cout << "insertion sort: " << is_sorted(output.begin(), output.end()) << '\n';
+	cout << "output size: " << output.size() << '\n';
 	output = MergeSort(input);
 	cout << "merge sort: " << is_sorted(output.begin(), output.end()) << '\n';
-
+	cout << "output size: " << output.size() << '\n';
 	return 0;
 }
