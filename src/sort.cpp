@@ -131,9 +131,38 @@ vector<int> MergeSort(vector<int> input) {
 	return output;
 }
 
+void Heapify(vector<int>& heap_me, int ii, int end) {
+	int left_ii = ii * 2;
+	int right_ii = left_ii + 1;
+	int max_ii = ii;
+	if (left_ii < end && heap_me[left_ii] > heap_me[max_ii]) {
+		max_ii = left_ii;
+	}
+	if (right_ii < end && heap_me[right_ii] > heap_me[max_ii]) {
+		max_ii = right_ii;
+	}
+	if (max_ii != ii) {
+		//swap
+		int temp = heap_me[ii];
+		heap_me[ii] = heap_me[max_ii];
+		heap_me[max_ii] = temp;
+		Heapify(heap_me, max_ii, end); //recurse only because we had to swap so now subtree may need reheaping
+	}
+}
+
 vector<int> HeapSort(vector<int> input) {
 	vector<int> output = input;
-
+	for (int ii = output.size() / 2; ii >= 0; --ii) {
+		Heapify(output, ii, output.size());
+	}
+	for (int ii = output.size() - 1; ii > 0; --ii) {
+		//put max of heap at end
+		int temp = output[0];
+		output[ii] = output[0]; //inserts max into sorted place
+		output[0] = temp; //possibly invalidate heap
+		//heapify all but max that was just moved
+		Heapify(output, 0, ii - 1);
+	}
 	return output;
 }
 
