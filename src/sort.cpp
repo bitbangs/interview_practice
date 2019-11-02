@@ -7,7 +7,7 @@ using namespace std;
 
 random_device rand_dev;
 mt19937 rand_gen(rand_dev());
-uniform_int_distribution<> rand_dis(2, 1000);
+uniform_int_distribution<> rand_dis(2, 2000);
 
 int GenerateRandomInt() {
 	return rand_dis(rand_gen);
@@ -28,6 +28,19 @@ vector<int> CreateRandomVector() {
 vector<int> InsertionSort(vector<int> input) {
 	vector<int> output;
 	output.reserve(input.size());
+	output.push_back(input[0]);
+	for (int ii = 1; ii < input.size(); ++ii) {
+		int output_size = output.size();
+		for (int jj = 0; jj < output_size; ++jj) {
+			if (output[jj] >= input[ii]) {
+				output.insert(output.begin() + jj, input[ii]);
+				break; //stop checking
+			}
+			else if (jj == output.size() - 1) {
+				output.insert(output.end(), input[ii]);
+			}
+		}
+	}
 	return output;
 }
 
