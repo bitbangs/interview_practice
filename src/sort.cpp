@@ -80,6 +80,11 @@ vector<int> MergeSort(vector<int> input) {
 		}
 		merge_stack.push(sub); //each sub is sorted (2 elems)
 	}
+	//may have a single element left
+	if (input.size() % 2 > 0) {
+		vector<int> leftover = { input[input.size() - 1] };
+		merge_stack.push(leftover);
+	}
 	//merge sorted sub arrays
 	while (merge_stack.size() > 1) {// && merge_stack.size() % 2 == 0) {
 		auto left = merge_stack.top();
@@ -90,9 +95,6 @@ vector<int> MergeSort(vector<int> input) {
 		merge_stack.push(merged);
 	}
 	output = merge_stack.top();	
-	//odd number of elements? insert last item into proper place in sorted array
-	//bug still exists when trying to get last element in	
-	//just not handling it...so input.size() != output.size()
 	return output;
 }
 
