@@ -166,6 +166,10 @@ vector<int> HeapSort(vector<int> input) {
 	return output;
 }
 
+vector<int> QuickSort(vector<int> input) {
+	return input;
+}
+
 int main(int argc, char* argv[]) {
 	vector<int> input = CreateRandomVector();
 	cout << "input size: " << input.size() << '\n';
@@ -180,6 +184,9 @@ int main(int argc, char* argv[]) {
 	cout << "output size: " << output.size() << '\n';
 	output = HeapSort(input);
 	cout << "heap sort: " << is_sorted(output.begin(), output.end()) << '\n';
+	cout << "output size: " << output.size() << '\n';
+	output = QuickSort(input);
+	cout << "quick sort: " << is_sorted(output.begin(), output.end()) << '\n';
 	cout << "output size: " << output.size() << '\n';
 	return 0;
 }
