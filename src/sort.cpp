@@ -28,20 +28,6 @@ vector<int> CreateRandomVector() {
 vector<int> InsertionSort(vector<int> input) {
 	vector<int> output;
 	output.reserve(input.size());
-	for (auto ii = input.begin(); ii != input.end(); ++ii) {
-		output.push_back(-1);
-	}
-	for (auto ii = input.begin(); ii != input.end(); ++ii) {
-		for (auto jj = output.begin(); jj != output.end(); ++jj) {
-			if (*ii > *jj) {
-				output.insert(jj - 1, *ii);
-				break;
-			}
-		}
-	}
-	if (input.size() > output.size()) { //last element in input was already in sorted place
-		output.push_back(input[input.size() - 1]);
-	}
 	return output;
 }
 
