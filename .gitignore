@@ -1,1 +1,5 @@
+#ignore binaries
 bin/
+
+#ignore convenience scripts
+*.sh

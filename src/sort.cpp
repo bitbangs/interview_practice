@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <random>
 #include <vector>
@@ -23,12 +24,24 @@ vector<int> CreateRandomVector() {
 	return random_vec;
 }
 
+vector<int> InsertionSort(std::vector<int> input) {
+	vector<int> output;
+	output.reserve(input.size());
+	for (auto ii = input.begin(); ii != input.end(); ++ii) {
+		for (auto jj = output.begin(); jj != output.end(); ++jj) {
+			if (*ii > *jj) {
+				output.insert(jj, *ii);
+				break;
+			}
+		}
+	}
+	return output;
+}
+
 int main(int argc, char* argv[]) {
 	vector<int> input = CreateRandomVector();
-	//cout << "insertion sort: " << InsertionSort(input) << '\n';
-	for (int ii : input) {	
-		cout << ii << '\n';
-	}
+	vector<int> output = InsertionSort(input);
+	cout << "insertion sort: " << is_sorted(output.begin(), output.end()) << '\n';
 
 	return 0;
 }
