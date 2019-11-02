@@ -28,18 +28,18 @@ vector<int> CreateRandomVector() {
 vector<int> SelectionSort(vector<int> input) {
 	vector<int> output = input;
 	for (int ii = 0; ii < output.size() - 1; ++ii) {
-		int min = output[ii];
+		int min_index = ii;
 		int jj = ii + 1;
 		for (; jj < output.size(); ++jj) {
-			if (min > output[jj]) {	
-				min = output[jj];
+			if (output[min_index] > output[jj]) {	
+				min_index = jj;
 			}
 		}
 		//swap to ii if needed
-		if (min != output[ii]) {
+		if (output[min_index] != output[ii]) {
 			int temp = output[ii];
-			output[ii] = min;
-			output[jj] = temp;
+			output[ii] = output[min_index];
+			output[min_index] = temp;
 		}
 	}
 	return output;
