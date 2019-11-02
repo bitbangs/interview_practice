@@ -131,6 +131,12 @@ vector<int> MergeSort(vector<int> input) {
 	return output;
 }
 
+vector<int> HeapSort(vector<int> input) {
+	vector<int> output = input;
+
+	return output;
+}
+
 int main(int argc, char* argv[]) {
 	vector<int> input = CreateRandomVector();
 	cout << "input size: " << input.size() << '\n';
@@ -142,6 +148,9 @@ int main(int argc, char* argv[]) {
 	cout << "output size: " << output.size() << '\n';
 	output = MergeSort(input);
 	cout << "merge sort: " << is_sorted(output.begin(), output.end()) << '\n';
+	cout << "output size: " << output.size() << '\n';
+	output = HeapSort(input);
+	cout << "heap sort: " << is_sorted(output.begin(), output.end()) << '\n';
 	cout << "output size: " << output.size() << '\n';
 	return 0;
 }
