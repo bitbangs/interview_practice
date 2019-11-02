@@ -25,6 +25,26 @@ vector<int> CreateRandomVector() {
 	return random_vec;
 }
 
+vector<int> SelectionSort(vector<int> input) {
+	vector<int> output = input;
+	for (int ii = 0; ii < output.size() - 1; ++ii) {
+		int min = output[ii];
+		int jj = ii + 1;
+		for (; jj < output.size(); ++jj) {
+			if (min > output[jj]) {	
+				min = output[jj];
+			}
+		}
+		//swap to ii if needed
+		if (min != output[ii]) {
+			int temp = output[ii];
+			output[ii] = min;
+			output[jj] = temp;
+		}
+	}
+	return output;
+}
+
 vector<int> InsertionSort(vector<int> input) {
 	vector<int> output;
 	output.reserve(input.size());
@@ -114,7 +134,10 @@ vector<int> MergeSort(vector<int> input) {
 int main(int argc, char* argv[]) {
 	vector<int> input = CreateRandomVector();
 	cout << "input size: " << input.size() << '\n';
-	vector<int> output = InsertionSort(input);
+	vector<int> output = SelectionSort(input);
+	cout << "selection sort: " << is_sorted(output.begin(), output.end()) << '\n';
+	cout << "output size: " << output.size() << '\n';
+	output = InsertionSort(input);
 	cout << "insertion sort: " << is_sorted(output.begin(), output.end()) << '\n';
 	cout << "output size: " << output.size() << '\n';
 	output = MergeSort(input);
