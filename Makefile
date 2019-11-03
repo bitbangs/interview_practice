@@ -1,3 +1,5 @@
+all: graph sort
+
 graph: graph.o
 	g++ bin/graph.o -o bin/graph
 

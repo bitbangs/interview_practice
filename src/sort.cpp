@@ -1,29 +1,9 @@
 #include <algorithm> //is_sorted
 #include <iostream> //test output
 #include <stack> //non-recursive merge sort
-#include <random> //vector gen
 #include <vector>
+#include "Random.hpp"
 using namespace std;
-
-random_device rand_dev;
-mt19937 rand_gen(rand_dev());
-uniform_int_distribution<> rand_dis(2, 2000);
-
-int GenerateRandomInt() {
-	return rand_dis(rand_gen);
-}
-
-vector<int> CreateRandomVector() {
-	vector<int> random_vec;
-	int size = GenerateRandomInt();
-	
-	random_vec.reserve(size);
-	for (int ii = 0; ii < size; ++ii) {
-		random_vec.push_back(GenerateRandomInt());
-	}
-
-	return random_vec;
-}
 
 vector<int> SelectionSort(vector<int> input) {
 	vector<int> output = input;
@@ -190,7 +170,8 @@ void QuickSort(vector<int>& input, int start, int end) {
 }
 
 int main(int argc, char* argv[]) {
-	vector<int> input = CreateRandomVector();
+	Random random;
+	vector<int> input = random.GenerateRandomVector();
 	cout << "input size: " << input.size() << '\n';
 	vector<int> output = SelectionSort(input);
 	cout << "selection sort: " << is_sorted(output.begin(), output.end()) << '\n';
