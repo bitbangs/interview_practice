@@ -4,7 +4,7 @@ using namespace std;
 
 random_device rand_dev;
 mt19937 rand_gen(rand_dev());
-uniform_int_distribution<> rand_dis(2, 2000);
+uniform_int_distribution<> rand_dis(1, 2000);
 
 class Random {
 public:
