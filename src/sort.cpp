@@ -169,7 +169,7 @@ vector<int> HeapSort(vector<int> input) {
 void QuickSort(vector<int>& input, int start, int end) {
 	if (start < end) {
 		int partition_index = start;
-		for (int ii = start; ii < end - 1; ++ii) {
+		for (int ii = start; ii < end; ++ii) {
 			if (input[ii] <= input[end]) {
 				//swap
 				int temp = input[partition_index];
@@ -205,7 +205,7 @@ int main(int argc, char* argv[]) {
 	cout << "heap sort: " << is_sorted(output.begin(), output.end()) << '\n';
 	cout << "output size: " << output.size() << '\n';
 	output = input;
-	QuickSort(output, 0 , output.size() - 1);
+	QuickSort(output, 0, output.size());
 	cout << "quick sort: " << is_sorted(output.begin(), output.end()) << '\n';
 	cout << "output size: " << output.size() << '\n';
 	return 0;
