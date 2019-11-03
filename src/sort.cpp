@@ -166,8 +166,27 @@ vector<int> HeapSort(vector<int> input) {
 	return output;
 }
 
-vector<int> QuickSort(vector<int> input) {
-	return input;
+void QuickSort(vector<int>& input, int start, int end) {
+	if (start < end) {
+		int partition_index = start;
+		for (int ii = start; ii < end - 1; ++ii) {
+			if (input[ii] <= input[end]) {
+				//swap
+				int temp = input[partition_index];
+				input[partition_index] = input[ii];
+				input[ii] = temp;
+				//increase the partition index
+				++partition_index;
+			}
+		}
+		//swap
+		int temp = input[partition_index];
+		input[partition_index] = input[end];
+		input[end] = temp;
+		//quicksort each parition
+		QuickSort(input, start, partition_index);
+		QuickSort(input, partition_index, end);
+	}
 }
 
 int main(int argc, char* argv[]) {
@@ -185,7 +204,8 @@ int main(int argc, char* argv[]) {
 	output = HeapSort(input);
 	cout << "heap sort: " << is_sorted(output.begin(), output.end()) << '\n';
 	cout << "output size: " << output.size() << '\n';
-	output = QuickSort(input);
+	output = input;
+	QuickSort(output, 0 , output.size() - 1);
 	cout << "quick sort: " << is_sorted(output.begin(), output.end()) << '\n';
 	cout << "output size: " << output.size() << '\n';
 	return 0;
