@@ -184,8 +184,8 @@ void QuickSort(vector<int>& input, int start, int end) {
 		input[partition_index] = input[end];
 		input[end] = temp;
 		//quicksort each parition
-		QuickSort(input, start, partition_index);
-		QuickSort(input, partition_index, end);
+		QuickSort(input, start, partition_index - 1);
+		QuickSort(input, partition_index + 1, end);
 	}
 }
 
